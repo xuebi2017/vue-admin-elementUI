@@ -1,25 +1,50 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
+import Login from "./views/Login.vue";
+import DeliveryStates from "./views/weighManage/deliveryStates.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
+const routes =  [
+  {
+    path: "/login",
+    component: Login,
+    name: "",
+    // hidden: true
+  },
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+    children: [
+      {
+        path: "/weighManage/deliveryStates",
+        name: "deliveryStates",
+        component: DeliveryStates
+      }
+    ]
+  }
+]
+const router =  new Router({
+  mode: "history",
+  // base: process.env.BASE_URL,
+  routes,
+});
+
+router.beforeEach((to, from, next) => {
+  //NProgress.start();
+  console.log('to--->',to)
+  console.log('from--->',from)
+  if (to.path == '/login') {
+    sessionStorage.removeItem('user');
+  }
+  let user = JSON.parse(sessionStorage.getItem('user'));
+  if (!user && to.path != '/login') {
+    next({ path: '/login' })
+  } else {
+    next()
+  }
 })
+
+export default router
