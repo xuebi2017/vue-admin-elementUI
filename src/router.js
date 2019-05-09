@@ -28,14 +28,12 @@ const routes =  [
 ]
 const router =  new Router({
   mode: "history",
-  // base: process.env.BASE_URL,
   routes,
 });
 
 router.beforeEach((to, from, next) => {
-  //NProgress.start();
-  console.log('to--->',to)
-  console.log('from--->',from)
+  // console.log('to--->',to)
+  // console.log('from--->',from)
   if (to.path == '/login') {
     sessionStorage.removeItem('user');
   }

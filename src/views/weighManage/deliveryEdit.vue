@@ -105,7 +105,7 @@ import {
   shipCodes,
   oreTypeAndSpecifications,
   transportationType
-} from '../data';
+} from './data';
 import moment from 'moment';
 import { disabledBeforeToday } from '@/utils';
 export default {

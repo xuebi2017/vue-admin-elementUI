@@ -39,7 +39,7 @@
           <el-table-column prop="deliveryStates.cargoSpecifications" label="货物规格" align="center"></el-table-column>
           <el-table-column label="运输方式" align="center">
             <template slot-scope="scope">
-              <el-button type="danger" size="small" plain>{{scope.row.deliveryStates.logisticsMode}}</el-button>
+              <el-tag type="danger" size="small" plain>{{scope.row.deliveryStates.logisticsMode}}</el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="deliveryStates.hasDelivered" label="已发(吨)" align="right"></el-table-column>
@@ -74,7 +74,7 @@
         :page-sizes="[10, 20, 30, 40, 50]"
         :page-size="queryParams.limit"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="40"
+        :total="5"
       ></el-pagination>
     </div>
     <row-add :modalVisible="addRowVisible" @changeAddRowVisible="changeAddRowVisible"></row-add>
