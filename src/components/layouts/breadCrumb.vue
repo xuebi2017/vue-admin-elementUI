@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{path:'/'}">
         <i class="breadCrumbIcon iconfont icon-home"></i>首页
       </el-breadcrumb-item>
-      <el-breadcrumb-item v-for="list in currentPath" :key="list.value">{{list}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="list in currentPath" :key="list">{{list}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -17,7 +17,6 @@ export default {
 $breadcrumb-height: 40px;
 .bread-class {
   display: flex;
-  // height: var(--breadcrumb-height);
   height: $breadcrumb-height;
   line-height: $breadcrumb-height;
   background-color: #fff;

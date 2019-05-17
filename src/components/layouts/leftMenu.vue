@@ -17,61 +17,56 @@
   </section>
 </template>
 <script>
-import menuData from './menuData'
-import navMenu from './navMenu.vue'
+import { mapState } from "vuex";
+import navMenu from "./navMenu.vue";
 export default {
-  name: 'left-menu',
+  name: "left-menu",
   data() {
     return {
       collapsed: false,
-      menuData: menuData.children
-    }
+      pathName: ''
+    };
   },
   components: {
     navMenu
   },
   computed: {
+    ...mapState({
+      menuData: state => state.routes
+    }),
     menuIcon() {
-      return this.collapsed ? 'menu-unfold' : 'menu-fold'
+      return this.collapsed ? "menu-unfold" : "menu-fold";
     }
   },
   methods: {
-    menuSelected(index, indexPath, item) {
-      const _This = this
-      if (item.route) {
-        _This.$router.push({
-          path: item.route
-        })
-
-        const pathName = []
-        var proc = (m, id) => {
-          if (m.entity.id == id && m.entity.name!=='首页'){
-            return m.entity.name
-          }
-          for (let i = 0; (m.children && i != m.children.length); i++){
-            const name = proc(m.children[i], id)
-            if (name != null) {
-              return name
-            }
-          }
-          return null
+    getPathName(menuData, path) {
+      menuData.forEach(m => {
+        if (m.path === path) {
+          this.pathName = m.name
+        }else if(m.children) {
+          this.pathName = this.getPathName(m.children, path)
         }
-        indexPath.forEach(id => {
-          _This.menuData.forEach(m => {
-            const name = proc(m, id)
-            if (name != null) {
-              pathName.push(name)
-            }
-          })
-        })
-        this.$emit('getBreadCrumb', pathName)
+      });
+      return this.pathName
+    },
+    menuSelected(index, indexPath, item) {
+      if (item.route) {
+        this.$router.push({
+          path: item.route
+        });
+        let pathName = [];
+        indexPath.forEach(path => {
+          let menuPath = this.getPathName(this.menuData, path)
+          menuPath && pathName.push(menuPath)
+        });
+        this.$emit("getBreadCrumb", pathName);
       }
     },
     menuStateChange() {
-      this.collapsed = !!!this.collapsed
+      this.collapsed = !!!this.collapsed;
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 $left-menu: 230px;

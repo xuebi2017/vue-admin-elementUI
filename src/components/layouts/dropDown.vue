@@ -3,6 +3,7 @@
     <span class="el-dropdown-link">
       你好^-^, {{userName}}
       <i class="el-icon-arrow-down el-icon--right"></i>
+      <!-- <a-avatar :src="avatar"/> -->
     </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item>
@@ -18,9 +19,10 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      userName: JSON.parse(sessionStorage.getItem('user')).username
-    }
-  }, 
+      userName: JSON.parse(sessionStorage.getItem("user")).username,
+      avatar: JSON.parse(sessionStorage.getItem("user")).avatar
+    };
+  },
   computed: {
     ...mapState({
       // userName: state => state.userInfo.username

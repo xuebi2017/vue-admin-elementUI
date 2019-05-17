@@ -1,11 +1,11 @@
 <template>
   <div class="wrap">
     <div class="container">
-      <section class="header">
+      <section class="header" style="height: 225px;">
         <img src="@/assets/img/login/logo.png" alt="logo">
       </section>
       <section class="content">
-        <img src="@/assets/img/login/banner-image.png" alt="banner-image">
+        <img src="@/assets/img/login/banner-image.png" alt="banner-image" width="775" height="550">
         <el-form
           :model="ruleForm2"
           :rules="rules2"
@@ -31,10 +31,9 @@
             <el-button
               type="primary"
               style="width:100%;"
-              @click.native.prevent="handleSubmit2"
+              @click.native.prevent="handleSubmit"
               :loading="logining"
             >登录</el-button>
-            <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
           </el-form-item>
         </el-form>
       </section>
@@ -70,7 +69,7 @@ export default {
     handleReset2() {
       this.$refs.ruleForm2.resetFields();
     },
-    handleSubmit2(ev) {
+    handleSubmit(ev) {
       var _this = this;
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {
@@ -90,7 +89,6 @@ export default {
                 type: "error"
               });
             } else {
-              console.log("this--->", this);
               this.$store.commit("setUserInfo", user);
               sessionStorage.setItem("user", JSON.stringify(user));
               this.$router.push({ path: "/" });
@@ -210,6 +208,8 @@ body {
 // .form-control {
 //   font-size: 15px;
 // }
+
+
 .login-container {
   border-radius: 5px;
   background-clip: padding-box;

@@ -1,8 +1,8 @@
 <template>
-  <el-submenu v-if="item.children && item.entity" :index="item.entity.id">
+  <el-submenu v-if="item.children" :index="item.path">
     <template slot="title">
-      <i :class="item.entity.icon"></i>
-      <span slot="title">{{item.entity.name}}</span>
+      <i :class="item.icon"></i>
+      <span slot="title">{{item.name}}</span>
     </template>
     <nav-menu :navMenus="item.children"></nav-menu>
   </el-submenu>

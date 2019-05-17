@@ -1,11 +1,11 @@
 <template>
   <el-menu-item
-    v-if="item.children === null && item.entity"
-    :index="item.entity.id"
-    :route="item.entity.route"
+    v-if="!item.children"
+    :index="item.path"
+    :route="item.path"
   >
-    <i :class="item.entity.icon"></i>
-    <span slot="title">{{item.entity.name}}</span>
+    <i :class="item.icon"></i>
+    <span slot="title">{{item.name}}</span>
   </el-menu-item>
 </template>
 <script>
