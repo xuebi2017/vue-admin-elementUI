@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { constantRoutes } from "./router";
+import { constantRoutes, asyncRoutes} from "./router";
+import { resolve } from "any-promise";
+import { async } from "q";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -8,18 +10,25 @@ export default new Vuex.Store({
     userInfo: {},
     routes: []
   },
+  getters: {
+    getUserInfo(state) {
+      return state.userInfo
+    }
+  },
   mutations: {
     setUserInfo(state, payload) {
       state.userInfo = payload;
     },
     generateRoutes(state, payload) {
-      state.routes = payload
+      state.routes = [...constantRoutes, ...payload]
     }
   },
   actions: {
     generateRoutes({commit}, roles) {
-      console.log('constantRoutes',constantRoutes)
-      commit('generateRoutes', constantRoutes)
+      return new Promise(resolve => {
+        commit('generateRoutes', asyncRoutes)
+        resolve(asyncRoutes)
+      })
     }
   }
 });

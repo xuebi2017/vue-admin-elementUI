@@ -1,10 +1,10 @@
 <template>
   <el-menu-item
-    v-if="!item.children"
+    v-if="!item.children && !item.hidden"
     :index="item.path"
     :route="item.path"
   >
-    <i :class="item.icon"></i>
+    <i :class="item.meta.icon"></i>
     <span slot="title">{{item.name}}</span>
   </el-menu-item>
 </template>

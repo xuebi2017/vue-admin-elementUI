@@ -1,7 +1,7 @@
 <template>
   <el-submenu v-if="item.children" :index="item.path">
     <template slot="title">
-      <i :class="item.icon"></i>
+      <i :class="item.meta.icon"></i>
       <span slot="title">{{item.name}}</span>
     </template>
     <nav-menu :navMenus="item.children"></nav-menu>

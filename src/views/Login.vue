@@ -44,6 +44,7 @@
 <script>
 import { requestLogin } from "@/api";
 import { user } from "@/mock/data/user";
+import {asyncRoutes} from '../router'
 export default {
   data() {
     return {
@@ -73,8 +74,6 @@ export default {
       var _this = this;
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {
-          // sessionStorage.setItem("user", JSON.stringify(user));
-          // this.$router.push({ path: "/" });
           this.logining = true;
           var loginParams = {
             username: this.ruleForm2.account,
@@ -84,14 +83,11 @@ export default {
             this.logining = false;
             let { msg, code, user } = data;
             if (code !== 200) {
-              this.$message({
-                message: msg,
-                type: "error"
-              });
+              this.$message.error(msg);
             } else {
-              this.$store.commit("setUserInfo", user);
+              // this.$store.commit("setUserInfo", user);
               sessionStorage.setItem("user", JSON.stringify(user));
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/deliveryStates" });
             }
           });
         } else {
