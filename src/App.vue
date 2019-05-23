@@ -1,9 +1,7 @@
 <template>
   <a-locale-provider :locale="locale">
     <div id="app">
-      <transition name="fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
+      <router-view></router-view>
     </div>
   </a-locale-provider>
 </template>
@@ -14,9 +12,9 @@ export default {
   data() {
     return {
       locale: zhCN
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -24,7 +22,7 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
 }
 #nav {

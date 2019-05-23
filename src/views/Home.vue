@@ -5,7 +5,9 @@
       <left-menu @getBreadCrumb="getBreadCrumb"></left-menu>
       <div class="content">
         <bread-crumb :currentPath="breadCrumb"></bread-crumb>
-        <router-view></router-view>
+        <transition name="page">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
     <footer-part></footer-part>
@@ -67,6 +69,15 @@ $content-background-color: #f0f3f6;
   flex-direction: column;
   width: 100%;
   background-color: $content-background-color;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
 }
 </style>
 

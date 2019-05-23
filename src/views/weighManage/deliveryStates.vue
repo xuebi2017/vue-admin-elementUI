@@ -1,11 +1,6 @@
 <template>
   <section class="container">
     <div class="tool-bar">
-      <!-- <filterable-select
-        :placeholder="placeholder[0]"
-        :options="planNum"
-        @optionChange="planNumChange()"
-      ></filterable-select>-->
       <a-date-picker
         size="large"
         @change="dateChange"
