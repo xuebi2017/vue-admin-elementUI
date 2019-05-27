@@ -1,4 +1,4 @@
-# vue-admin-zyp
+# vue-admin
 
 ## Project setup
 ```
